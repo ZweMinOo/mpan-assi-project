@@ -1,0 +1,138 @@
+body {
+	background-image:url('../images/background-2.jpg');
+	background-size:100%;
+	
+}
+
+.width-300px {
+	width : 100%;
+}
+
+.bg-white {
+	background-color:white;
+	color:black;
+}
+
+.bg-dark {
+	background-color:  #333333;
+	color:white;
+}
+
+.btn-dark {
+	border:1px solid gray;
+	background-color:  #333333;
+	color:white;
+	font-style:bold;
+}
+
+.panel-dark {
+	background-color:  #565f60;
+	color:white;
+}
+
+.bg-black {
+	background-color: #333333;
+}
+.btn-dark:hover {
+	color:#bfbfbf;
+}
+
+.font-white {
+	color:white;
+}
+
+.img-profile {
+	border-radius: 50%;
+	width : 150px;
+	height : 150px;
+	box-shadow: 5px 4px 3px white;
+}
+
+.shadow-1 {
+	box-shadow: 2px 4px 3px gray;
+}
+
+.img-indicator {
+	box-shadow: 2px 4px 3px gray;
+	border-radius: 3px;
+	width:100%;
+	height:230px;
+}
+
+.img-indicator1 {
+	box-shadow: 2px 4px 3px gray;
+	border-radius: 3px;
+	width:100%;
+	height:100%;
+}
+
+.modal-login{
+	width:400px;
+}
+
+.modal-registrator{
+	width:400px;
+}
+
+.modal-profile {
+	width:300px;
+}
+.panel-body {
+	text-align: left;
+}
+
+.panel {
+	box-shadow: 2px 4px 3px gray;
+}
+.icon-bar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.icon-bar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.icon-bar a:hover {
+    color: #f1f1f1;
+}
+
+.message-bar {
+	height: 40px;
+	width:100%;
+}
+
+#nav {
+	transition: margin-left .5s;
+}
+
+#main {
+	transition: margin-left .5s;
+	width:100%;
+	height:100%;
+	margin-top:20px;
+	padding: 16px;
+	
+}
+
+@media screen and (max-height: 768px) {
+  .img-indicator { height: 180px;}
+}
+
+@media screen and (max-height: 450px) {
+  .icon-bar {padding-top: 15px;}
+  .icon-bar a {font-size: 18px;}
+}

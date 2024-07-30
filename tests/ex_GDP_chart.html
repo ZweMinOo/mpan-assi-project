@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" language="javascript" src="jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        $.ajax({
+          method: "GET",
+          dataType: "jsonp",
+          url: "http://api.worldbank.org/v2/countries/MMR;THA/indicators/NY.GDP.MKTP.CD?per_page=300&date=2004:2007&format=jsonP&prefix=?",
+          success: function (GDPJson) {
+            console.log(GDPJson);
+            GDP_data = GDPJson[1];
+            chart_data = [
+              ['Year', 'Myanmar GDP', 'Thai GDP']
+            ];
+            for(var GDP of GDP_data) {
+              if (GDP.date == '2004') {
+                if (GDP.countryiso3code === 'MMR') {
+                  chart_data[1] = ['2004', Number((GDP.value/100000000).toFixed(2)) ]
+                } else if (GDP.countryiso3code === 'THA') {
+                  chart_data[1].push(Number((GDP.value/100000000).toFixed(2)))
+                }
+                
+              } else if (GDP.date == '2005') {
+                if (GDP.countryiso3code === 'MMR') {
+                  chart_data[2] = ['2005', Number((GDP.value/100000000).toFixed(2)) ]
+                } else if (GDP.countryiso3code === 'THA') {
+                  chart_data[2].push(Number((GDP.value/100000000).toFixed(2)))
+                }
+              } else if (GDP.date == '2006') {
+                if (GDP.countryiso3code === 'MMR') {
+                  chart_data[3] = ['2006', Number((GDP.value/100000000).toFixed(2)) ]
+                } else if (GDP.countryiso3code === 'THA') {
+                  chart_data[3].push(Number((GDP.value/100000000).toFixed(2)))
+                }
+              } else if (GDP.date == '2007') {
+                if (GDP.countryiso3code === 'MMR') {
+                  chart_data[4] = ['2007', Number((GDP.value/100000000).toFixed(2)) ]
+                } else if (GDP.countryiso3code === 'THA') {
+                  chart_data[4].push(Number((GDP.value/100000000).toFixed(2)))
+                }
+              }
+            }
+            console.log(chart_data);
+            var data = google.visualization.arrayToDataTable(chart_data);
+            var options = {
+              title: 'GDP of Countries (billion USD)',
+              curveType: 'function',
+              legend: { position: 'bottom' },
+              backgroundColor: 'yellow',
+              colors: ['green','darkred']
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
+
+            chart.draw(data, options);
+          }
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+</html>

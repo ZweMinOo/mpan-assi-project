@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, maximum-scale=2.0">
+	<title>DataTables example - Nested object data (arrays)</title>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="style.css"> 
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/jquery.dataTables.js"></script>
+	<script src="assets/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" language="javascript" class="init">
+	
+	$(document).ready(function() {
+		$('#example').DataTable( {
+			"ajax": {
+				type: "GET",
+				url: "http://api.worldbank.org/v2/countries/all/indicators/NY.GDP.MKTP.CD?per_page=300&date=2002:2004&format=jsonP&prefix=?",
+				dataSrc: function (GDPJson) {
+					console.log(GDPJson);
+					GDP_data = GDPJson[1];
+					table_data = [];
+					for(var GDP of GDP_data) {
+						console.log(GDP);
+						table_data.push({
+							country: GDP.country.value,
+							iso3code: GDP.countryiso3code,
+							year: GDP.date,
+							indicator: GDP.indicator.value,
+							value: GDP.value,
+						});
+					}
+					return table_data;
+				}
+			},
+			"columns": [
+				{ "data": "country" },
+				{ "data": "iso3code" },
+				{ "data": "year" },
+				{ "data": "indicator" },
+				{ "data": "value" }
+			]
+		} );
+	} );
+
+	</script>
+</head>
+<body class="dt-example">
+	<div class="container">
+		<section>
+			<h1>GDP of countries</h1>
+			<table id="example" class="display" cellspacing="0" width="100%">
+				<thead>
+					<tr>
+						<th>Country/Region</th>
+						<th>ISO3 Code</th>
+						<th>Year</th>
+						<th>Indicator</th>
+						<th>Value</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th>Country/Region</th>
+						<th>ISO3 Code</th>
+						<th>Year</th>
+						<th>Indicator</th>
+						<th>Value</th>
+					</tr>
+				</tfoot>
+			</table>
+		</section>
+	</div>
+</body>
+</html>
